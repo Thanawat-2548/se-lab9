@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>กระดานถาม-ตอบ กิจกรรม</title>
+    <link rel="stylesheet" href="thanwtt_Q&A_Board_style.css">
+</head>
+<body>
+    <main class="qna-board">
+        <header class="qna-header">
+            <h1 class="qna-title">กระดานถาม-ตอบ</h1>
+            <span class="qna-badge">5 คำถาม</span>
+        </header>
+
+        <article class="question-card">
+            <div class="qna-header" style="margin-bottom: 0;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <div class="avatar">ส</div>
+                    <div>
+                        <p class="user-name">นักศึกษา_A</p>
+                        <div class="question-meta">2 ชั่วโมงที่แล้ว</div>
+                    </div>
+                </div>
+                <span class="status-pill status-answered">ตอบแล้ว</span>
+            </div>
+            <p class="question-text">ต้องเตรียมอุปกรณ์อะไรมาบ้างคะ?</p>
+            
+            <div class="reply-block">
+                <div class="reply-label">
+                    <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    ผู้สอน
+                </div>
+                <p class="reply-text">ให้เตรียมโน้ตบุ๊กมาด้วยนะครับ ซอฟต์แวร์จะติดตั้งให้ในงาน</p>
+                <div class="reply-actions">
+                    <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                    12
+                </div>
+            </div>
+        </article>
+
+        <div class="load-more-wrapper">
+            <button class="load-more-btn">โหลดคำถามเพิ่มเติม (2)</button>
+        </div>
+    </main>
+
+    <div class="input-fixed">
+        <div class="input-inner">
+            <textarea class="question-input" placeholder="พิมพ์คำถามของคุณที่นี่... คำถามของคุณจะปรากฏให้ทุกคนเห็น"></textarea>
+            <div class="submit-row">
+                <button class="submit-btn">
+                    <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                    ส่งคำถาม
+                </button>
+            </div>
+        </div>
+    </div>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const submitBtn = document.querySelector(".submit-btn");
+        const question = document.querySelector(".question-input");
+
+        if (submitBtn && question) {
+            submitBtn.addEventListener("click", function(event) {
+                event.preventDefault();
+                if (question.value.trim() === "") {
+                    alert("กรุณาพิมพ์คำถามก่อนส่ง");
+                } else {
+                    alert("ส่งคำถามสำเร็จ! (Prototype)");
+                    question.value = ""; // เคลียร์ช่องพิมพ์หลังส่ง
+                }
+            });
+        } else {
+            console.error("หาปุ่มหรือช่องพิมพ์ไม่เจอ ตรวจสอบชื่อ class อีกครั้ง!");
+        }
+    });
+</script>
+</body>
+</html>
