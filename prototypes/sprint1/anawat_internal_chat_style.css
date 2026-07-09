@@ -1,0 +1,233 @@
+*{
+    box-sizing:border-box;
+    font-family: Arial, sans-serif;
+}
+ 
+ 
+body{
+ 
+    background:#f2f5fa;
+    margin:0;
+ 
+}
+ 
+ 
+ 
+.container{
+ 
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    padding:40px;
+ 
+}
+ 
+ 
+/* Product */
+ 
+ 
+.product-card{
+ 
+    width:350px;
+    background:white;
+    border-radius:20px;
+    padding:25px;
+    box-shadow:0 5px 20px #ccc;
+ 
+}
+ 
+ 
+.product-card img{
+ 
+    width:100%;
+    border-radius:15px;
+ 
+}
+ 
+ 
+.product-card h3{
+ 
+    font-size:22px;
+ 
+}
+ 
+ 
+.price{
+ 
+    font-size:20px;
+    font-weight:bold;
+    color:#2563eb;
+ 
+}
+ 
+ 
+.available{
+ 
+    color:green;
+    font-weight:bold;
+ 
+}
+ 
+ 
+ 
+button{
+ 
+    cursor:pointer;
+    border:none;
+    padding:12px 20px;
+    border-radius:10px;
+ 
+}
+ 
+ 
+ 
+.negotiate{
+ 
+    background:#2563eb;
+    color:white;
+ 
+}
+ 
+ 
+.buy{
+ 
+    background:#22c55e;
+    color:white;
+ 
+}
+ 
+ 
+ 
+ 
+/* Chat */
+ 
+ 
+.chat-card{
+ 
+    width:450px;
+    height:650px;
+    background:white;
+    border-radius:25px;
+    display:flex;
+    flex-direction:column;
+    box-shadow:0 5px 20px #ccc;
+ 
+}
+ 
+ 
+header{
+ 
+    padding:20px;
+    background:#2563eb;
+    color:white;
+    border-radius:25px 25px 0 0;
+ 
+}
+ 
+ 
+ 
+.messages{
+ 
+    flex:1;
+    padding:20px;
+    overflow:auto;
+ 
+}
+ 
+ 
+ 
+.message{
+ 
+    padding:12px;
+    border-radius:15px;
+    margin-bottom:15px;
+    width:70%;
+ 
+}
+ 
+ 
+.seller{
+ 
+    background:#e5e7eb;
+ 
+}
+ 
+ 
+.buyer{
+ 
+    background:#2563eb;
+    color:white;
+    margin-left:auto;
+ 
+}
+ 
+ 
+ 
+/* Offer */
+ 
+ 
+.offer{
+ 
+    background:#fff7ed;
+    border:2px solid #fb923c;
+    padding:15px;
+    border-radius:15px;
+    margin:20px 0;
+ 
+}
+ 
+ 
+.accept{
+ 
+    background:#22c55e;
+    color:white;
+ 
+}
+ 
+ 
+.decline{
+ 
+    background:#ef4444;
+    color:white;
+ 
+}
+ 
+ 
+.counter{
+ 
+    background:#f59e0b;
+    color:white;
+ 
+}
+ 
+ 
+ 
+ 
+.input-area{
+ 
+    display:flex;
+    padding:15px;
+    border-top:1px solid #ddd;
+ 
+}
+ 
+ 
+ 
+.input-area input{
+ 
+    flex:1;
+    padding:15px;
+    border-radius:20px;
+    border:1px solid #ccc;
+ 
+}
+ 
+ 
+ 
+.input-area button{
+ 
+    margin-left:10px;
+    background:#2563eb;
+    color:white;
+ 
+}
