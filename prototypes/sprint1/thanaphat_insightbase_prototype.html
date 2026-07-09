@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบบันทึกข้อมูล RSVP (นิสิต)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ==========================================================================
+           CSS STYLES
+           ========================================================================== */
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* กล่องครอบพื้นที่ฟอร์ม */
+        .form-container {
+            width: 100%;
+            max-width: 650px;
+            background-color: #ffffff;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #e1e4e8;
+            padding-bottom: 10px;
+        }
+
+        /* สไตล์ของแต่ละฟิลด์ */
+        .form-field-box {
+            background-color: #fafbfc;
+            border: 1px solid #e1e4e8;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+
+        .field-label {
+            display: block;
+            font-weight: 500;
+            font-size: 15px;
+            color: #333333;
+            margin-bottom: 10px;
+        }
+
+        .required {
+            color: #de4437;
+            margin-left: 3px;
+        }
+
+        /* สไตล์ของกล่อง Input / Select */
+        .field-input, .field-select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccd4dc;
+            border-radius: 6px;
+            background-color: #ffffff;
+            font-size: 14px;
+            color: #333333;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .field-input:focus, .field-select:focus {
+            border-color: #4a90e2;
+            box-shadow: 0 0 5px rgba(74, 144, 226, 0.2);
+        }
+
+        /* สไตล์กลุ่มปุ่มเลือกเพศ (Radio) */
+        .field-options {
+            display: flex;
+            gap: 24px;
+            padding-top: 4px;
+        }
+
+        .radio-label {
+            font-size: 14px;
+            color: #555555;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .radio-label input[type="radio"] {
+            cursor: pointer;
+            width: 16px;
+            height: 16px;
+            margin: 0;
+        }
+
+        /* ข้อความแจ้งเตือนสถานะการบันทึก */
+        .save-status {
+            font-size: 13px;
+            color: #28a745;
+            text-align: right;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <div class="form-title">📝 ฟอร์มข้อมูลเพิ่มเติมสำหรับผู้เข้าร่วมกิจกรรม</div>
+        
+        <form id="rsvpForm">
+            <div class="form-field-box">
+                <label class="field-label">ชื่อ - นามสกุล <span class="required">*</span></label>
+                <input type="text" id="studentName" class="field-input" placeholder="กรอกชื่อ-นามสกุลของคุณ">
+            </div>
+
+            <div class="form-field-box">
+                <label class="field-label">รหัสนิสิต <span class="required">*</span></label>
+                <input type="text" id="studentId" class="field-input" placeholder="กรอกรหัสนิสิต 10 หลัก">
+            </div>
+
+            <div class="form-field-box">
+                <label class="field-label">เพศ <span class="required">*</span></label>
+                <div class="field-options">
+                    <label class="radio-label"><input type="radio" name="gender" value="ชาย"> ชาย</label>
+                    <label class="radio-label"><input type="radio" name="gender" value="หญิง"> หญิง</label>
+                    <label class="radio-label"><input type="radio" name="gender" value="ไม่ระบุ"> ไม่ระบุ/เพศทางเลือก</label>
+                </div>
+            </div>
+
+            <div class="form-field-box">
+                <label class="field-label">ไซส์เสื้อ</label>
+                <select id="shirtSize" class="field-select">
+                    <option value="">-- เลือกไซส์เสื้อยืด --</option>
+                    <option value="S">S (รอบอก 36 นิ้ว)</option>
+                    <option value="M">M (รอบอก 38 นิ้ว)</option>
+                    <option value="L">L (รอบอก 40 นิ้ว)</option>
+                    <option value="XL">XL (รอบอก 42 นิ้ว)</option>
+                    <option value="XXL">XXL (รอบอก 44 นิ้ว)</option>
+                </select>
+            </div>
+
+            <div class="form-field-box">
+                <label class="field-label">อาหารที่แพ้ / ข้อจำกัดด้านอาหาร</label>
+                <input type="text" id="allergy" class="field-input" placeholder="เช่น แพ้กุ้ง, ทานเจ, มังสวิรัติ (หากไม่มีให้ระบุว่า -)">
+            </div>
+        </form>
+        
+        <div id="statusMessage" class="save-status">✓ บันทึกข้อมูลการพิมพ์อัตโนมัติแล้ว</div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const formInputs = {
+                studentName: document.getElementById('studentName'),
+                studentId: document.getElementById('studentId'),
+                shirtSize: document.getElementById('shirtSize'),
+                allergy: document.getElementById('allergy')
+            };
+            const genderInputs = document.querySelectorAll('input[name="gender"]');
+            const statusMessage = document.getElementById('statusMessage');
+
+            // 1. โหลดข้อมูลเก่าที่บันทึกไว้ใน LocalStorage ออกมาแสดงผลตอนรีเฟรชหน้าจอ
+            Object.keys(formInputs).forEach(key => {
+                const savedValue = localStorage.getItem(key);
+                if (savedValue) {
+                    formInputs[key].value = savedValue;
+                }
+            });
+
+            const savedGender = localStorage.getItem('gender');
+            if (savedGender) {
+                genderInputs.forEach(radio => {
+                    if (radio.value === savedGender) {
+                        radio.checked = true;
+                    }
+                });
+            }
+
+            // ฟังก์ชันแสดงข้อความว่าบันทึกแล้วแบบเนียนๆ
+            function showSaveStatus() {
+                statusMessage.style.display = 'block';
+                setTimeout(() => {
+                    statusMessage.style.display = 'none';
+                }, 1500);
+            }
+
+            // 2. ดักจับเหตุการณ์การพิมพ์หรือกดเลือก แล้วบันทึกลง LocalStorage ทันที
+            Object.keys(formInputs).forEach(key => {
+                formInputs[key].addEventListener('input', () => {
+                    localStorage.setItem(key, formInputs[key].value);
+                    showSaveStatus();
+                });
+            });
+
+            genderInputs.forEach(radio => {
+                radio.addEventListener('change', () => {
+                    localStorage.setItem('gender', radio.value);
+                    showSaveStatus();
+                });
+            });
+        });
+    </script>
+</body>
+</html>
