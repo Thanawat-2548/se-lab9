@@ -1,0 +1,145 @@
+/* ตั้งค่าพื้นฐานและฟอนต์พิมพ์นิยมแบบ UI ลื่นๆ */
+body {
+    font-family: 'Sarabun', sans-serif;
+    background-color: #f4f6f9;
+    margin: 0;
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+/* กล่องครอบพื้นที่จัดวางฟอร์ม */
+.form-builder-container {
+    width: 100%;
+    max-width: 760px;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* สไตล์ของแต่ละฟิลด์ (แต่ละแถว) */
+.form-field-box {
+    display: flex;
+    align-items: center;
+    background-color: #fafbfc;
+    border: 1px solid #e1e4e8;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    transition: all 0.2s ease;
+}
+
+.form-field-box:hover {
+    border-color: #4a90e2;
+    box-shadow: 0 2px 8px rgba(74, 144, 226, 0.1);
+}
+
+/* ไอคอนจุดๆ สำหรับลากสลับตำแหน่งด้านซ้าย */
+.field-drag-handle {
+    color: #a3b2c2;
+    cursor: move;
+    padding-right: 15px;
+    font-size: 18px;
+}
+
+/* ส่วนเนื้อหาคำถามและช่อง Input */
+.field-content {
+    flex-grow: 1;
+    padding-right: 20px;
+}
+
+.field-label {
+    display: block;
+    font-weight: 500;
+    font-size: 15px;
+    color: #333333;
+    margin-bottom: 8px;
+}
+
+.required {
+    color: #de4437;
+    margin-left: 3px;
+}
+
+/* สไตล์ของกล่อง Input / Select */
+.field-input, .field-select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccd4dc;
+    border-radius: 6px;
+    background-color: #f8f9fa;
+    font-size: 14px;
+    color: #555555;
+    box-sizing: border-box;
+}
+
+/* สไตล์กลุ่มปุ่มเลือกเพศ (Radio) */
+.field-options {
+    display: flex;
+    gap: 20px;
+    padding-top: 4px;
+}
+
+.radio-label {
+    font-size: 14px;
+    color: #555555;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* ส่วนตั้งค่าด้านขวาของแต่ละฟิลด์ (ติ๊กบังคับกรอก / ลบ) */
+.field-settings {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-left: 1px solid #e1e4e8;
+    padding-left: 15px;
+    font-size: 13px;
+    color: #666666;
+    white-space: nowrap;
+}
+
+.field-settings input[type="checkbox"] {
+    cursor: pointer;
+}
+
+/* ปุ่มลบถังขยะ */
+.btn-delete {
+    background: none;
+    border: none;
+    color: #cb2431;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 5px;
+    transition: color 0.2s;
+}
+
+.btn-delete:hover {
+    color: #bd1f2d;
+}
+
+/* ปุ่มกดเพิ่มฟิลด์ใหม่ด้านล่างสุด */
+.btn-add-field {
+    width: 100%;
+    padding: 14px;
+    background-color: #ffffff;
+    border: 2px dashed #b0c4de;
+    border-radius: 8px;
+    color: #4a90e2;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+}
+
+.btn-add-field:hover {
+    background-color: #f0f6ff;
+    border-color: #4a90e2;
+}
