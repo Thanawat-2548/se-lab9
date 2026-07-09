@@ -1,0 +1,149 @@
+/* รีเซ็ตค่าพื้นฐาน */
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+body { background-color: #f0f2f5; display: flex; justify-content: center; padding: 20px; }
+
+/* กรอบจำลองหน้าจอมือถือ */
+.mobile-container {
+    width: 100%;
+    max-width: 400px;
+    height: 800px;
+    background-color: #ffffff;
+    border: 2px solid #333;
+    border-radius: 30px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* ส่วนหัวของแอป */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+}
+.logo-area { display: flex; align-items: center; gap: 10px; font-weight: bold; font-size: 1.2rem; }
+.logo-circle { width: 30px; height: 30px; border: 2px solid #333; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+
+/* ปุ่มสร้างโพสต์ */
+.create-btn {
+    background: none;
+    border: 2px solid #333;
+    border-radius: 8px;
+    padding: 5px 12px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    font-weight: bold;
+}
+.create-btn:hover { background-color: #f0f0f0; }
+
+/* พื้นที่เนื้อหาหลัก */
+.content { flex: 1; padding: 20px; overflow-y: auto; }
+
+/* สไตล์ช่องค้นหา / Input */
+.search-bar, .input-field {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 1rem;
+}
+
+/* สไตล์การ์ด */
+.card {
+    border: 2px solid #333;
+    border-radius: 15px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+.card-image-placeholder {
+    width: 100%;
+    height: 100px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #888;
+}
+.card-lines { margin-bottom: 15px; }
+.line { height: 4px; background-color: #ccc; margin-bottom: 6px; border-radius: 2px; }
+.line.short { width: 60%; }
+
+/* ปุ่ม Join / Publish */
+.action-btn {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #333;
+    border-radius: 8px;
+    background-color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+}
+.action-btn:hover { background-color: #333; color: white; }
+
+/* ฟอร์มสร้างโพสต์ */
+.form-group { margin-bottom: 15px; }
+.form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
+.row { display: flex; gap: 10px; }
+.row .form-group { flex: 1; }
+
+/* Stepper จำนวนคน */
+.stepper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 2px solid #333;
+    border-radius: 8px;
+    padding: 5px 15px;
+}
+.stepper-btn { 
+    background: #eee; 
+    border: 1px solid #333; 
+    border-radius: 4px;
+    width: 30px;
+    height: 30px;
+    font-size: 1.2rem; 
+    cursor: pointer; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.stepper-btn:hover { background: #ddd; }
+
+/* แถบเมนูด้านล่าง */
+.bottom-nav {
+    display: flex;
+    justify-content: space-around;
+    padding: 15px 20px;
+    border-top: 1px solid #eee;
+    background: white;
+}
+.nav-icon { 
+    font-size: 1.5rem;
+    color: #555;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+.nav-icon:hover, .nav-icon.active { color: #000; }
+.nav-label { font-size: 0.7rem; font-weight: bold; }
+
+/* การซ่อนหน้า */
+/* การซ่อนหน้า (แก้เป็นแบบนี้) */
+.hidden { display: none !important; }
+
+#screen1, #screen2 {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
