@@ -3,111 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CampusLink Prototype</title>
+    <title>CampusLink - Desktop Web</title>
     
+    <!-- FontAwesome & Google Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- เชื่อมไฟล์ CSS -->
     <link rel="stylesheet" href="phuettiphorn_post_style.css">
 </head>
 <body>
 
-    <div class="mobile-container">
+    <!-- Top Navbar -->
+    <nav class="navbar">
+        <div class="logo-area">
+            <div class="logo-circle"><i class="fa-solid fa-graduation-cap"></i></div>
+            CampusLink
+        </div>
+
+        <div class="search-bar-container">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="ค้นหากีฬา หรือสถานที่...">
+        </div>
+
+        <div class="nav-actions">
+            <button class="icon-btn active" title="Home"><i class="fa-solid fa-house"></i></button>
+            <button class="icon-btn" title="Alerts"><i class="fa-solid fa-bell"></i></button>
+            <button class="icon-btn" title="Profile"><i class="fa-solid fa-user"></i></button>
+            <button class="create-btn" onclick="toggleModal(true)">
+                <i class="fa-solid fa-plus"></i> Create Post
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+        <h2 class="section-title">กิจกรรมที่กำลังจะเกิดขึ้น</h2>
         
-        <div id="screen1">
-            <div class="header">
-                <div class="logo-area">
-                    <div class="logo-circle"><i class="fa-solid fa-graduation-cap" style="font-size: 14px;"></i></div>
-                    CampusLink
+        <div class="grid-container">
+            
+            <!-- Card 1 -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon"><i class="fa-solid fa-futbol"></i></div>
+                    <div>
+                        <div class="card-title">เตะบอลหลังเลิกเรียน</div>
+                        <div class="card-host">โดย User123</div>
+                    </div>
                 </div>
-                <div style="text-align: center; font-size: 0.8rem;">
-                    Create<br>
-                    <button class="create-btn" onclick="switchScreen('screen2')">+</button>
+                <div class="card-details">
+                    <div><i class="fa-solid fa-location-dot"></i> สนามฟุตบอล มหาวิทยาลัย</div>
+                    <div><i class="fa-regular fa-calendar"></i> 25 ก.ค. 2026</div>
+                    <div><i class="fa-regular fa-clock"></i> 17:00 น.</div>
+                    <div><i class="fa-solid fa-users"></i> ต้องการ 5 คน</div>
                 </div>
+                <button class="action-btn">Join Team</button>
             </div>
 
-            <div class="content">
-                <input type="text" class="search-bar" placeholder="ค้นหากีฬา หรือสถานที่...">
-
-                <div class="card">
-                    <div class="card-image-placeholder"><i class="fa-solid fa-futbol fa-2x"></i></div>
-                    <div class="card-lines">
-                        <div class="line"></div>
-                        <div class="line short"></div>
+            <!-- Card 2 -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon"><i class="fa-solid fa-basketball"></i></div>
+                    <div>
+                        <div class="card-title">บาสเกตบอล 3v3</div>
+                        <div class="card-host">โดย Student_A</div>
                     </div>
-                    <button class="action-btn">join Team</button>
                 </div>
-
-                <div class="card">
-                    <div class="card-image-placeholder"><i class="fa-solid fa-basketball fa-2x"></i></div>
-                    <div class="card-lines">
-                        <div class="line"></div>
-                        <div class="line short"></div>
-                    </div>
-                    <button class="action-btn">join Team</button>
+                <div class="card-details">
+                    <div><i class="fa-solid fa-location-dot"></i> โรงยิมเนเซียม 2</div>
+                    <div><i class="fa-regular fa-calendar"></i> 26 ก.ค. 2026</div>
+                    <div><i class="fa-regular fa-clock"></i> 18:30 น.</div>
+                    <div><i class="fa-solid fa-users"></i> ต้องการ 2 คน</div>
                 </div>
+                <button class="action-btn">Join Team</button>
             </div>
+            
+            <!-- Card 3 -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon"><i class="fa-solid fa-book"></i></div>
+                    <div>
+                        <div class="card-title">กลุ่มติวเตรียมสอบ</div>
+                        <div class="card-host">โดย NerdBoy</div>
+                    </div>
+                </div>
+                <div class="card-details">
+                    <div><i class="fa-solid fa-location-dot"></i> ห้องสมุดกลาง ชั้น 3</div>
+                    <div><i class="fa-regular fa-calendar"></i> 28 ก.ค. 2026</div>
+                    <div><i class="fa-regular fa-clock"></i> 13:00 น.</div>
+                    <div><i class="fa-solid fa-users"></i> ต้องการ 3 คน</div>
+                </div>
+                <button class="action-btn">Join Team</button>
+            </div>
+
         </div>
+    </main>
 
-        <div id="screen2" class="hidden">
-            <div class="header">
-                <div class="logo-area">
-                    <div class="logo-circle"><i class="fa-solid fa-graduation-cap" style="font-size: 14px;"></i></div>
-                    CampusLink
-                </div>
+    <!-- Create Post Modal -->
+    <div class="modal-overlay" id="createModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>สร้างกิจกรรมใหม่</h2>
+                <button class="close-btn" onclick="toggleModal(false)"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            
+            <div class="form-group">
+                <label>หัวข้อโพสต์</label>
+                <input type="text" class="input-field" placeholder="เช่น เตะบอล, นัดติวหนังสือ...">
             </div>
 
-            <div class="content">
-                <input type="text" class="search-bar" placeholder="หัวข้อโพสต์...">
+            <div class="form-group">
+                <label>สถานที่ (Location)</label>
+                <input type="text" class="input-field" placeholder="ระบุสถานที่">
+            </div>
 
+            <div class="row">
                 <div class="form-group">
-                    <label>Location</label>
-                    <input type="text" class="input-field" placeholder="ระบุสถานที่">
+                    <label>วันที่ (Date)</label>
+                    <input type="date" class="input-field">
                 </div>
-
-                <div class="row">
-                    <div class="form-group">
-                        <label>Date</label>
-                        <input type="date" class="input-field">
-                    </div>
-                    <div class="form-group">
-                        <label>Time</label>
-                        <input type="time" class="input-field">
-                    </div>
-                </div>
-
                 <div class="form-group">
-                    <label>Required person</label>
-                    <div class="stepper">
-                        <button class="stepper-btn" onclick="updatePerson(-1)">-</button>
-                        <span id="person-count" style="font-size: 1.2rem; font-weight: bold;">1</span>
-                        <button class="stepper-btn" onclick="updatePerson(1)">+</button>
-                    </div>
+                    <label>เวลา (Time)</label>
+                    <input type="time" class="input-field">
                 </div>
-
-                <button class="action-btn" style="margin-top: 20px;" onclick="switchScreen('screen1')">Publish Post</button>
             </div>
+
+            <div class="form-group">
+                <label>จำนวนคนที่ต้องการ (Required persons)</label>
+                <div class="stepper">
+                    <button class="stepper-btn" onclick="updatePerson(-1)">-</button>
+                    <span id="person-count" style="font-size: 1.2rem; font-weight: 600; width: 30px; text-align: center;">1</span>
+                    <button class="stepper-btn" onclick="updatePerson(1)">+</button>
+                </div>
+            </div>
+
+            <button class="publish-btn" onclick="toggleModal(false)">Publish Post</button>
         </div>
-
-        <div class="bottom-nav">
-            <div class="nav-icon active">
-                <i class="fa-solid fa-house"></i>
-                <span class="nav-label">Home</span>
-            </div>
-            <div class="nav-icon">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <span class="nav-label">Search</span>
-            </div>
-            <div class="nav-icon">
-                <i class="fa-solid fa-bell"></i>
-                <span class="nav-label">Alerts</span>
-            </div>
-            <div class="nav-icon">
-                <i class="fa-solid fa-user"></i>
-                <span class="nav-label">Profile</span>
-            </div>
-        </div>
-
     </div>
 
+    <!-- เชื่อมไฟล์ JavaScript -->
     <script src="phuettiphorn_post_script.js"></script>
 </body>
 </html>
