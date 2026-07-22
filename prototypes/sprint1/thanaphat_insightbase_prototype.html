@@ -103,12 +103,57 @@
             margin: 0;
         }
 
-        /* ข้อความแจ้งเตือนสถานะการบันทึก */
-        .save-status {
-            font-size: 13px;
-            color: #28a745;
-            text-align: right;
+        /* สไตล์ปุ่มบันทึกข้อมูล */
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background-color: #0066cc;
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            font-family: 'Sarabun', sans-serif;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
             margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            background-color: #0052a3;
+        }
+
+        .btn-submit:active {
+            transform: scale(0.99);
+        }
+
+        /* ข้อความแจ้งเตือนสถานะการบันทึก / ข้อผิดพลาด */
+        .save-status {
+            font-size: 14px;
+            text-align: center;
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 6px;
+            display: none;
+        }
+
+        .save-status.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .save-status.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* ข้อความแจ้งเตือนใต้ Input */
+        .error-hint {
+            color: #de4437;
+            font-size: 12px;
+            margin-top: 6px;
             display: none;
         }
     </style>
@@ -121,12 +166,14 @@
         <form id="rsvpForm">
             <div class="form-field-box">
                 <label class="field-label">ชื่อ - นามสกุล <span class="required">*</span></label>
-                <input type="text" id="studentName" class="field-input" placeholder="กรอกชื่อ-นามสกุลของคุณ">
+                <input type="text" id="studentName" class="field-input" placeholder="กรอกชื่อ-นามสกุลของคุณ" required>
             </div>
 
             <div class="form-field-box">
                 <label class="field-label">รหัสนิสิต <span class="required">*</span></label>
-                <input type="text" id="studentId" class="field-input" placeholder="กรอกรหัสนิสิต 10 หลัก">
+                <!-- กำหนด maxlength="8" และใส่ inputmode เพื่อขึ้นแป้นตัวเลขในมือถือ -->
+                <input type="text" id="studentId" class="field-input" placeholder="กรอกรหัสนิสิต 8 หลัก" maxlength="8" inputmode="numeric">
+                <div id="idErrorHint" class="error-hint">กรุณากรอกรหัสนิสิตให้ครบ 8 หลักพอดี</div>
             </div>
 
             <div class="form-field-box">
@@ -154,13 +201,16 @@
                 <label class="field-label">อาหารที่แพ้ / ข้อจำกัดด้านอาหาร</label>
                 <input type="text" id="allergy" class="field-input" placeholder="เช่น แพ้กุ้ง, ทานเจ, มังสวิรัติ (หากไม่มีให้ระบุว่า -)">
             </div>
+
+            <button type="submit" class="btn-submit">💾 บันทึกข้อมูล</button>
         </form>
         
-        <div id="statusMessage" class="save-status">✓ บันทึกข้อมูลการพิมพ์อัตโนมัติแล้ว</div>
+        <div id="statusMessage" class="save-status"></div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('rsvpForm');
             const formInputs = {
                 studentName: document.getElementById('studentName'),
                 studentId: document.getElementById('studentId'),
@@ -169,8 +219,9 @@
             };
             const genderInputs = document.querySelectorAll('input[name="gender"]');
             const statusMessage = document.getElementById('statusMessage');
+            const idErrorHint = document.getElementById('idErrorHint');
 
-            // 1. โหลดข้อมูลเก่าที่บันทึกไว้ใน LocalStorage ออกมาแสดงผลตอนรีเฟรชหน้าจอ
+            // 1. ดึงข้อมูลเก่าที่บันทึกไว้ใน LocalStorage ออกมาแสดงผล
             Object.keys(formInputs).forEach(key => {
                 const savedValue = localStorage.getItem(key);
                 if (savedValue) {
@@ -187,27 +238,60 @@
                 });
             }
 
-            // ฟังก์ชันแสดงข้อความว่าบันทึกแล้วแบบเนียนๆ
-            function showSaveStatus() {
-                statusMessage.style.display = 'block';
-                setTimeout(() => {
-                    statusMessage.style.display = 'none';
-                }, 1500);
-            }
+            // 2. ควบคุมการพิมพ์รหัสนิสิต: ห้ามพิมพ์เกิน 8 ตัว และ กรองเฉพาะตัวเลข
+            formInputs.studentId.addEventListener('input', (e) => {
+                // เก็บเฉพาะตัวเลข และตัดความยาวไม่เกิน 8 ตัวทันที
+                let val = e.target.value.replace(/[^0-9]/g, '');
+                if (val.length > 8) {
+                    val = val.slice(0, 8);
+                }
+                e.target.value = val;
 
-            // 2. ดักจับเหตุการณ์การพิมพ์หรือกดเลือก แล้วบันทึกลง LocalStorage ทันที
-            Object.keys(formInputs).forEach(key => {
-                formInputs[key].addEventListener('input', () => {
-                    localStorage.setItem(key, formInputs[key].value);
-                    showSaveStatus();
-                });
+                // ซ่อนข้อความเตือนเมื่อครบ 8 ตัว
+                if (val.length === 8) {
+                    idErrorHint.style.display = 'none';
+                }
             });
 
-            genderInputs.forEach(radio => {
-                radio.addEventListener('change', () => {
-                    localStorage.setItem('gender', radio.value);
-                    showSaveStatus();
+            // ฟังก์ชันแสดงข้อความสถานะ
+            function showStatus(message, isSuccess) {
+                statusMessage.textContent = message;
+                statusMessage.className = `save-status ${isSuccess ? 'success' : 'error'}`;
+                statusMessage.style.display = 'block';
+                
+                setTimeout(() => {
+                    statusMessage.style.display = 'none';
+                }, 3000);
+            }
+
+            // 3. บันทึกข้อมูลเมื่อกดปุ่ม Submit
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                const studentIdValue = formInputs.studentId.value.trim();
+
+                // ตรวจสอบความยาวรหัสนิสิต (ต้อง 8 ตัวเท่านั้น)
+                if (studentIdValue.length !== 8) {
+                    idErrorHint.style.display = 'block';
+                    showStatus('❌ บันทึกไม่สำเร็จ: รหัสนิสิตต้องมี 8 หลักพอดี', false);
+                    formInputs.studentId.focus();
+                    return;
+                }
+
+                // ตรวจสอบว่าเลือกเพศหรือยัง
+                const selectedGender = document.querySelector('input[name="gender"]:checked');
+                if (!selectedGender) {
+                    showStatus('❌ บันทึกไม่สำเร็จ: กรุณาเลือกเพศ', false);
+                    return;
+                }
+
+                // บันทึกลง LocalStorage เมื่อผ่านเงื่อนไข
+                Object.keys(formInputs).forEach(key => {
+                    localStorage.setItem(key, formInputs[key].value);
                 });
+                localStorage.setItem('gender', selectedGender.value);
+
+                showStatus('✓ บันทึกข้อมูลเรียบร้อยแล้ว!', true);
             });
         });
     </script>
