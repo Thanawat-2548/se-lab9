@@ -1,149 +1,352 @@
-/* รีเซ็ตค่าพื้นฐาน */
-* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-body { background-color: #f0f2f5; display: flex; justify-content: center; padding: 20px; }
-
-/* กรอบจำลองหน้าจอมือถือ */
-.mobile-container {
-    width: 100%;
-    max-width: 400px;
-    height: 800px;
-    background-color: #ffffff;
-    border: 2px solid #333;
-    border-radius: 30px;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+/* ---------------- CSS Styles ---------------- */
+:root {
+    --primary: #4F46E5;
+    --primary-hover: #4338CA;
+    --bg-color: #F3F4F6;
+    --card-bg: #FFFFFF;
+    --text-main: #1F2937;
+    --text-muted: #6B7280;
+    --border-color: #E5E7EB;
 }
 
-/* ส่วนหัวของแอป */
-.header {
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Prompt', sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+}
+
+/* --- Navbar --- */
+.navbar {
+    background-color: var(--card-bg);
+    height: 70px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 20px;
-    border-bottom: 1px solid #eee;
+    justify-content: space-between;
+    padding: 0 40px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
-.logo-area { display: flex; align-items: center; gap: 10px; font-weight: bold; font-size: 1.2rem; }
-.logo-circle { width: 30px; height: 30px; border: 2px solid #333; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
 
-/* ปุ่มสร้างโพสต์ */
-.create-btn {
-    background: none;
-    border: 2px solid #333;
-    border-radius: 8px;
-    padding: 5px 12px;
-    font-size: 1.2rem;
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--primary);
     cursor: pointer;
-    font-weight: bold;
-}
-.create-btn:hover { background-color: #f0f0f0; }
-
-/* พื้นที่เนื้อหาหลัก */
-.content { flex: 1; padding: 20px; overflow-y: auto; }
-
-/* สไตล์ช่องค้นหา / Input */
-.search-bar, .input-field {
-    width: 100%;
-    padding: 12px;
-    border: 2px solid #ccc;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    font-size: 1rem;
 }
 
-/* สไตล์การ์ด */
-.card {
-    border: 2px solid #333;
-    border-radius: 15px;
-    padding: 15px;
-    margin-bottom: 20px;
-}
-.card-image-placeholder {
-    width: 100%;
-    height: 100px;
-    border: 2px solid #ccc;
-    border-radius: 8px;
-    margin-bottom: 10px;
+.logo-circle {
+    background-color: var(--primary);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #888;
 }
-.card-lines { margin-bottom: 15px; }
-.line { height: 4px; background-color: #ccc; margin-bottom: 6px; border-radius: 2px; }
-.line.short { width: 60%; }
 
-/* ปุ่ม Join / Publish */
-.action-btn {
+.search-bar-container {
+    flex-grow: 1;
+    max-width: 500px;
+    margin: 0 40px;
+    position: relative;
+}
+
+.search-bar-container input {
     width: 100%;
-    padding: 12px;
-    border: 2px solid #333;
-    border-radius: 8px;
-    background-color: white;
+    padding: 10px 20px 10px 40px;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-color);
     font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    text-align: center;
+    transition: all 0.3s;
 }
-.action-btn:hover { background-color: #333; color: white; }
 
-/* ฟอร์มสร้างโพสต์ */
-.form-group { margin-bottom: 15px; }
-.form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
-.row { display: flex; gap: 10px; }
-.row .form-group { flex: 1; }
+.search-bar-container input:focus {
+    outline: none;
+    border-color: var(--primary);
+    background-color: white;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
 
-/* Stepper จำนวนคน */
+.search-bar-container i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.icon-btn:hover, .icon-btn.active {
+    color: var(--primary);
+}
+
+.create-btn {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.create-btn:hover {
+    background-color: var(--primary-hover);
+}
+
+/* --- Main Content & Grid --- */
+.container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.section-title {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: var(--text-main);
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+/* --- Cards --- */
+.card {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.card-icon {
+    width: 60px;
+    height: 60px;
+    background-color: var(--bg-color);
+    color: var(--primary);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+}
+
+.card-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.card-host {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.card-details {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.card-details i {
+    width: 20px;
+    color: var(--primary);
+}
+
+.action-btn {
+    margin-top: auto;
+    width: 100%;
+    background-color: white;
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.action-btn:hover {
+    background-color: var(--primary);
+    color: white;
+}
+
+/* --- Modal (Create Post) --- */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+    z-index: 1000;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background-color: var(--card-bg);
+    width: 100%;
+    max-width: 500px;
+    border-radius: 16px;
+    padding: 30px;
+    transform: translateY(-20px);
+    transition: all 0.3s;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.modal-overlay.active .modal-content {
+    transform: translateY(0);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.modal-header h2 {
+    font-size: 1.5rem;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-muted);
+    cursor: pointer;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--text-main);
+}
+
+.input-field {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.input-field:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.row {
+    display: flex;
+    gap: 16px;
+}
+.row .form-group {
+    flex: 1;
+}
+
 .stepper {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    border: 2px solid #333;
-    border-radius: 8px;
-    padding: 5px 15px;
+    gap: 16px;
 }
-.stepper-btn { 
-    background: #eee; 
-    border: 1px solid #333; 
-    border-radius: 4px;
-    width: 30px;
-    height: 30px;
-    font-size: 1.2rem; 
-    cursor: pointer; 
+
+.stepper-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
+    background-color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: all 0.2s;
 }
-.stepper-btn:hover { background: #ddd; }
 
-/* แถบเมนูด้านล่าง */
-.bottom-nav {
-    display: flex;
-    justify-content: space-around;
-    padding: 15px 20px;
-    border-top: 1px solid #eee;
-    background: white;
+.stepper-btn:hover {
+    background-color: var(--bg-color);
+    border-color: var(--primary);
+    color: var(--primary);
 }
-.nav-icon { 
-    font-size: 1.5rem;
-    color: #555;
+
+.publish-btn {
+    width: 100%;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 500;
     cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
+    margin-top: 10px;
+    transition: background-color 0.3s;
 }
-.nav-icon:hover, .nav-icon.active { color: #000; }
-.nav-label { font-size: 0.7rem; font-weight: bold; }
 
-/* การซ่อนหน้า */
-/* การซ่อนหน้า (แก้เป็นแบบนี้) */
-.hidden { display: none !important; }
-
-#screen1, #screen2 {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
+.publish-btn:hover {
+    background-color: var(--primary-hover);
 }
