@@ -40,62 +40,9 @@
     <main class="container">
         <h2 class="section-title">กิจกรรมที่กำลังจะเกิดขึ้น</h2>
         
-        <div class="grid-container">
-            
-            <!-- Card 1 -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-icon"><i class="fa-solid fa-futbol"></i></div>
-                    <div>
-                        <div class="card-title">เตะบอลหลังเลิกเรียน</div>
-                        <div class="card-host">โดย User123</div>
-                    </div>
-                </div>
-                <div class="card-details">
-                    <div><i class="fa-solid fa-location-dot"></i> สนามฟุตบอล มหาวิทยาลัย</div>
-                    <div><i class="fa-regular fa-calendar"></i> 25 ก.ค. 2026</div>
-                    <div><i class="fa-regular fa-clock"></i> 17:00 น.</div>
-                    <div><i class="fa-solid fa-users"></i> ต้องการ 5 คน</div>
-                </div>
-                <button class="action-btn">Join Team</button>
-            </div>
-
-            <!-- Card 2 -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-icon"><i class="fa-solid fa-basketball"></i></div>
-                    <div>
-                        <div class="card-title">บาสเกตบอล 3v3</div>
-                        <div class="card-host">โดย Student_A</div>
-                    </div>
-                </div>
-                <div class="card-details">
-                    <div><i class="fa-solid fa-location-dot"></i> โรงยิมเนเซียม 2</div>
-                    <div><i class="fa-regular fa-calendar"></i> 26 ก.ค. 2026</div>
-                    <div><i class="fa-regular fa-clock"></i> 18:30 น.</div>
-                    <div><i class="fa-solid fa-users"></i> ต้องการ 2 คน</div>
-                </div>
-                <button class="action-btn">Join Team</button>
-            </div>
-            
-            <!-- Card 3 -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-icon"><i class="fa-solid fa-book"></i></div>
-                    <div>
-                        <div class="card-title">กลุ่มติวเตรียมสอบ</div>
-                        <div class="card-host">โดย NerdBoy</div>
-                    </div>
-                </div>
-                <div class="card-details">
-                    <div><i class="fa-solid fa-location-dot"></i> ห้องสมุดกลาง ชั้น 3</div>
-                    <div><i class="fa-regular fa-calendar"></i> 28 ก.ค. 2026</div>
-                    <div><i class="fa-regular fa-clock"></i> 13:00 น.</div>
-                    <div><i class="fa-solid fa-users"></i> ต้องการ 3 คน</div>
-                </div>
-                <button class="action-btn">Join Team</button>
-            </div>
-
+        <!-- ส่วนที่ Refactor: ลบ Card ที่ Hardcode ไว้ทั้งหมด และใส่ id="activities-container" ให้ JS มาเติมข้อมูลแทน -->
+        <div class="grid-container" id="activities-container">
+            <!-- ข้อมูล Card จะถูก Render อัตโนมัติผ่าน JavaScript (phuettiphorn_post_script.js) -->
         </div>
     </main>
 
