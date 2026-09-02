@@ -10,34 +10,6 @@ _CampusLink คือแพลตฟอร์มชุมชนออนไล�
 - [67024762 นายธนพัฒน์ สีทา], GitHub: `[@RawrMeatt]`
 - [67021343 อนวัช เคนวงศ์ษา], GitHub: `[@anawatowen1-alt]`
 
----
-
-## 🚀 Getting Started
-
-This section explains how to get a local copy of the project up and running for development and testing purposes.
-
-### Prerequisites
-
-- Git
-- Python 3.10+
-- Docker & Docker Compose
-
-### Running the Application (with Docker)
-
-1.  **Clone the repository:**
-    ```bash
-    git clone [your-repository-url]
-    cd [your-project-folder]
-    ```
-
-2.  **Run the services:**
-    *(This section will be updated in later weeks when using Docker Compose)*
-    ```bash
-    # Example for a single service
-    cd services/stats-service
-    docker build -t your-team/stats-service .
-    docker run -p 5001:5000 your-team/stats-service
-    ```
 
 ---
 

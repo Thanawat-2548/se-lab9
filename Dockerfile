@@ -1,37 +1,18 @@
-# Stage 1: builder (สร้าง virtual environment และติดตั้ง dependencies)
-FROM python:3.11-slim AS builder
+# ใช้ Python 3.11 รุ่น slim
+FROM python:3.11-slim
 
+# กำหนดโฟลเดอร์ทำงานหลัก
 WORKDIR /app
 
-ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1
+# คัดลอกไฟล์ทั้งหมดจากโฟลเดอร์ prototypes/sprint1 เข้ามาใน Container
+COPY prototypes/sprint1/ .
 
-RUN python -m venv /opt/venv
-ENV PATH="/opt/venv/bin:$PATH"
-
-COPY services/stats-service/requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-
-
-# Stage 2: runner (คัดลอกเฉพาะ venv และซอร์สโค้ดมารัน)
-FROM python:3.11-slim AS runner
-
-WORKDIR /app
-
-ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1 \
-    PATH="/opt/venv/bin:$PATH"
-
-# ดึงเฉพาะ virtual environment จาก Stage builder
-COPY --from=builder /opt/venv /opt/venv
-
-# คัดลอกซอร์สโค้ดของ stats-service
-COPY services/stats-service/ .
-
-# สร้างและเปลี่ยนไปใช้ Non-root User เพื่อ Security
+# สร้างและเปลี่ยนไปใช้ Non-root User เพื่อความปลอดภัย
 RUN adduser --disabled-password --gecos "" appuser && chown -R appuser:appuser /app
 USER appuser
 
+# แจ้งว่า Container นี้จะใช้พอร์ต 8000
 EXPOSE 8000
 
-CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
+# ใช้คำสั่ง HTTP Server พื้นฐานของ Python เพื่อให้บริการหน้าเว็บ
+CMD ["python", "-m", "http.server", "8000"]
