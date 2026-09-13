@@ -1,4 +1,5 @@
 from unittest.mock import Mock
+
 from src.campus_service import send_university_email
 
 
